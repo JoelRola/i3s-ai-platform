@@ -34,14 +34,6 @@ jobs:
 
           docker compose -f monitoring/docker-compose.yml config --quiet
           docker compose -f file_generation/file_service/compose.yaml config --quiet
-        run: |
-          python - <<'PY'
-          import json, pathlib
-          for path in pathlib.Path('monitoring/grafana/dashboards').glob('*.json'):
-              json.load(path.open())
-          PY
-          docker compose -f monitoring/docker-compose.yml config --quiet
-          docker compose -f file_generation/file_service/compose.yaml config --quiet
       - name: Toolbox security regression checks
         run: |
           ! rg -n 'shell=True|os\.system|requests\.(get|post)|urllib' file_generation/file_service/app.py
