@@ -23,6 +23,17 @@ jobs:
         run: |
           cp monitoring/grafana.env.example monitoring/grafana.env
       - name: Configuration schema checks
+        env:
+          I3S_FILE_SERVICE_KEY: ci-validation-placeholder
+        run: |
+          python - <<'PY'
+          import json, pathlib
+          for path in pathlib.Path('monitoring/grafana/dashboards').glob('*.json'):
+              json.load(path.open())
+          PY
+
+          docker compose -f monitoring/docker-compose.yml config --quiet
+          docker compose -f file_generation/file_service/compose.yaml config --quiet
         run: |
           python - <<'PY'
           import json, pathlib
