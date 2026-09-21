@@ -1,0 +1,23 @@
+{
+  "captured_at": "2026-09-16T14:53:21Z",
+  "open_webui": {
+    "public_config": {
+      "status": true,
+      "name": "I3S (Open WebUI)",
+      "version": "0.11.3",
+      "features": {"auth": true, "enable_websocket": true}
+    },
+    "container_revision": "0a7c15832fb30b1903753e83f81dc7d27e5b0944",
+    "authenticated_api_status": "unavailable: /api/v1/models, /api/v1/configs/code_execution, and /api/v1/configs/terminal_servers returned HTTP 401 without credentials",
+    "i3s_work_model_definition": "not retrievable without authenticated admin API access",
+    "terminal_connection_configuration": "not retrievable without authenticated admin API access"
+  },
+  "open_terminal": {
+    "container": "open-terminal-i3s-work",
+    "health": "healthy from Open WebUI network namespace",
+    "private_url": "http://172.20.0.2:8000",
+    "features": {"terminal": true, "notebooks": true, "system": true},
+    "api_routes_verified_previously": ["/execute", "/files/write", "/files/list", "/files/read", "/files/display"]
+  },
+  "redaction": "No API keys, tokens, passwords, cookies, or database contents were collected."
+}

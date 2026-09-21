@@ -1,0 +1,76 @@
+2026-09-14T15:37:38.024414+00:00
+
+GPU
+Mon Sep 14 15:37:38 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 580.178.04             Driver Version: 580.178.04     CUDA Version: 13.0     |
++-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  Tesla P100-PCIE-16GB           Off |   00000000:00:10.0 Off |                    0 |
+| N/A   43C    P0             25W /  250W |       0MiB /  16384MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+
+
+Loaded Ollama models
+NAME    ID    SIZE    PROCESSOR    CONTEXT    UNTIL 
+
+
+RAM
+               total        used        free      shared  buff/cache   available
+Mem:            14Gi       1.7Gi       1.3Gi       5.0Mi        12Gi        12Gi
+Swap:          4.0Gi       376Mi       3.6Gi
+
+
+Disk
+Filesystem                         Size  Used Avail Use% Mounted on
+/dev/mapper/ubuntu--vg-ubuntu--lv   57G   26G   30G  47% /
+/dev/sdb1                           98G   40G   54G  43% /mnt/ai-data
+
+
+Docker containers
+/open-webui status=running health=healthy
+/litellm status=running 
+
+
+Installed Ollama models
+NAME                  ID              SIZE      MODIFIED    
+qwen2.5-coder:7b      dae161e27b0e    4.7 GB    4 hours ago    
+qwen2.5-coder:3b      f72c60cabf62    1.9 GB    5 hours ago    
+qwen2.5:7b            845dbda0ea48    4.7 GB    5 hours ago    
+qwen2.5:3b            357c53fb659c    1.9 GB    5 hours ago    
+llama3.2:3b           a80c4f17acd5    2.0 GB    5 hours ago    
+gemma3:12b            f4031aab637d    8.1 GB    2 days ago     
+qwen3:14b             bdbd181c33f2    9.3 GB    2 days ago     
+mistral-nemo:12b      e7e06d107c6c    7.1 GB    2 days ago     
+qwen2.5-coder:0.5b    4ff64a7f502a    397 MB    3 days ago     
+gemma3:1b             8648f39daa8f    815 MB    3 days ago     
+qwen2.5-coder:1.5b    d7372fd82851    986 MB    3 days ago     
+
+
+Ollama service
+active
+
+
+LiteLLM model aliases
+i3s-fast
+i3s-balanced
+i3s-coding
+i3s-diagrams
+
+open-webui: errors in last 50 log lines (past 24 hours)
+No matching errors in sampled log lines.
+
+litellm: errors in last 50 log lines (past 24 hours)
+No matching errors in sampled log lines.

@@ -1,0 +1,17 @@
+{
+  "uid": "i3s-public-access",
+  "title": "I3S Public Access",
+  "tags": ["i3s", "public", "funnel"],
+  "timezone": "utc",
+  "schemaVersion": 41,
+  "version": 1,
+  "refresh": "30s",
+  "panels": [
+    {"id":1,"type":"stat","title":"Local Open WebUI","gridPos":{"x":0,"y":0,"w":6,"h":5},"datasource":{"type":"prometheus","uid":"prometheus"},"targets":[{"expr":"i3s_public_http_up{endpoint=\"local_openwebui\"}","refId":"A"}],"fieldConfig":{"defaults":{"mappings":[{"type":"value","options":{"0":{"text":"DOWN","color":"red"},"1":{"text":"UP","color":"green"}}}]}}},
+    {"id":2,"type":"stat","title":"External DNS (1.1.1.1)","gridPos":{"x":6,"y":0,"w":6,"h":5},"datasource":{"type":"prometheus","uid":"prometheus"},"targets":[{"expr":"i3s_public_dns_up","refId":"A"}],"fieldConfig":{"defaults":{"mappings":[{"type":"value","options":{"0":{"text":"DOWN","color":"red"},"1":{"text":"UP","color":"green"}}}]}}},
+    {"id":3,"type":"stat","title":"Public Open WebUI","gridPos":{"x":12,"y":0,"w":6,"h":5},"datasource":{"type":"prometheus","uid":"prometheus"},"targets":[{"expr":"i3s_public_http_up{endpoint=\"public_openwebui\"}","refId":"A"}],"fieldConfig":{"defaults":{"mappings":[{"type":"value","options":{"0":{"text":"DOWN","color":"red"},"1":{"text":"UP","color":"green"}}}]}}},
+    {"id":4,"type":"stat","title":"Public Grafana","gridPos":{"x":18,"y":0,"w":6,"h":5},"datasource":{"type":"prometheus","uid":"prometheus"},"targets":[{"expr":"i3s_public_http_up{endpoint=\"public_grafana\"}","refId":"A"}],"fieldConfig":{"defaults":{"mappings":[{"type":"value","options":{"0":{"text":"DOWN","color":"red"},"1":{"text":"UP","color":"green"}}}]}}},
+    {"id":5,"type":"timeseries","title":"Public endpoint latency","gridPos":{"x":0,"y":5,"w":12,"h":8},"datasource":{"type":"prometheus","uid":"prometheus"},"targets":[{"expr":"i3s_public_http_latency_seconds","legendFormat":"{{endpoint}}","refId":"A"}],"fieldConfig":{"defaults":{"unit":"s"}}},
+    {"id":6,"type":"timeseries","title":"Consecutive failures","gridPos":{"x":12,"y":5,"w":12,"h":8},"datasource":{"type":"prometheus","uid":"prometheus"},"targets":[{"expr":"i3s_public_consecutive_failures","legendFormat":"{{endpoint}}","refId":"A"}],"fieldConfig":{"defaults":{"min":0}}}
+  ]
+}

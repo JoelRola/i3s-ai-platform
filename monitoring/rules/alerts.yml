@@ -1,0 +1,23 @@
+groups:
+  - name: host-and-containers
+    rules:
+      - alert: HostRAMHigh
+        expr: (1 - node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes) > 0.90
+        for: 5m
+      - alert: HostDiskHigh
+        expr: (1 - node_filesystem_avail_bytes{fstype!~"tmpfs|overlay"} / node_filesystem_size_bytes{fstype!~"tmpfs|overlay"}) > 0.85
+        for: 10m
+      - alert: PrometheusTargetDown
+        expr: up == 0
+        for: 2m
+      - alert: GPUVRAMHigh
+        expr: nvidia_gpu_memory_used_bytes / nvidia_gpu_memory_total_bytes > 0.95
+        for: 5m
+      - alert: I3SPublicAccessRepeatedFailure
+        expr: i3s_public_consecutive_failures >= 3
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: I3S public access has failed three consecutive checks
+          description: Investigate local backend, external DNS, and Tailscale Funnel status. The monitor never resets Funnel automatically.

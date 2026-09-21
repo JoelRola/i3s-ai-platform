@@ -1,0 +1,20 @@
+Authenticated Open WebUI discovery test, 2026-09-16
+Model: i3s-work (backend response model: i3s-main)
+Selected terminal: i3s-work-files
+
+Open Terminal functions discovered from official /openapi.json:
+- list_files
+- read_file
+- display_file
+- write_file
+- replace_file_content
+- grep_files
+- search_files
+- glob_files
+- run_command
+
+Real Open WebUI /api/chat/completions result:
+- finish_reason: tool_calls
+- selected function: write_file
+- selected arguments targeted /home/acfa51bf/tool_discovery.csv
+- write_note was not selected or exposed by i3s-work's Notes category.

@@ -1,0 +1,47 @@
+services:
+  open-terminal-i3s-work:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: i3s/open-terminal-filegen:local
+    container_name: open-terminal-i3s-work
+    restart: unless-stopped
+    environment:
+      OPEN_TERMINAL_API_KEY: ${OPEN_TERMINAL_API_KEY:?set in .env}
+      OPEN_TERMINAL_MULTI_USER: "true"
+      HOME: /home/user
+    volumes:
+      - i3s-work-terminal-data:/home
+    networks:
+      - i3s_work_internal
+    # Stable private address for the host-networked Open WebUI backend.
+    ipv4_address: 172.20.0.2
+    # The official image creates per-user homes at startup. Its immutable image
+    # layer is otherwise isolated; only the dedicated /home volume and tmpfs
+    # paths are persistent/writable.
+    tmpfs:
+      - /tmp:rw,noexec,nosuid,size=512m
+      - /run:rw,noexec,nosuid,size=64m
+      - /var/run:rw,noexec,nosuid,size=64m
+    # The official image uses a dedicated Python interpreter with file
+    # capabilities, incompatible with Docker's no-new-privileges setting.
+    # Remove only capabilities that are unnecessary for file generation.
+    cap_drop:
+      - NET_RAW
+      - SYS_ADMIN
+      - NET_ADMIN
+    pids_limit: 256
+    mem_limit: 3g
+    cpus: 2.0
+
+volumes:
+  i3s-work-terminal-data:
+    name: i3s-work-terminal-data
+
+networks:
+  i3s_work_internal:
+    name: i3s-work-internal
+    internal: true
+    ipam:
+      config:
+        - subnet: 172.20.0.0/24

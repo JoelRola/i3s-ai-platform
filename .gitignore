@@ -1,0 +1,81 @@
+# Credentials and private configuration
+.env
+.env.*
+!.env.example
+!*.env.example
+secrets/
+credentials/
+*.pem
+*.key
+*.p12
+*.pfx
+*.csr
+
+# Runtime data, databases, user content, and backups
+data/
+uploads/
+generated/
+backups/
+**/litellm_config*.yaml
+*.db
+*.sqlite
+*.sqlite3
+*.db-journal
+*.db-wal
+*.db-shm
+*.tar
+*.tar.gz
+*.tgz
+*.zip
+
+# Observability state
+monitoring/grafana.env
+monitoring/state/
+monitoring/node-textfile/*.prom
+prometheus_data/
+loki_data/
+alloy_data/
+grafana_data/
+loki/
+prometheus/
+
+# Models and caches
+models/
+ollama/
+whisper/
+cache/
+*.gguf
+*.bin
+*.safetensors
+*.onnx
+
+# Generated/intermediate files
+logs/
+*.log
+*_responses.jsonl
+.gateway_eval.lock
+.llm_benchmark.lock
+*.tmp
+*.swp
+*.bak
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+file-generation-validation/
+benchmark/results/*/responses.jsonl
+
+# Tools and IDEs
+.DS_Store
+.idea/
+.vscode/
+venv/
+.venv/
+node_modules/
+
+# Runtime Prometheus textfile temp files
+monitoring/node-textfile/.nvidia_gpu.prom.*
+
+# Runtime Prometheus textfile temp files
+monitoring/node-textfile/.nvidia_gpu.prom.*

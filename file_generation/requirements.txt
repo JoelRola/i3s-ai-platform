@@ -1,0 +1,6 @@
+python-docx
+openpyxl
+python-pptx
+fpdf2
+Pillow
+matplotlib

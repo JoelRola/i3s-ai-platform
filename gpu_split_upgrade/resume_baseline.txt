@@ -1,0 +1,155 @@
+brain2
+2026-09-15T15:55:04+00:00
+Tue Sep 15 15:55:04 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 580.178.04             Driver Version: 580.178.04     CUDA Version: 13.0     |
++-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  Tesla P100-PCIE-16GB           Off |   00000000:00:10.0 Off |                    0 |
+| N/A   42C    P0             25W /  250W |       0MiB /  16384MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+|   1  NVIDIA A100-SXM4-40GB          Off |   00000000:00:11.0 Off |                    0 |
+| N/A   45C    P0             58W /  400W |       0MiB /  40960MiB |      0%      Default |
+|                                         |                        |             Disabled |
++-----------------------------------------+------------------------+----------------------+
+
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+GPU 0: Tesla P100-PCIE-16GB (UUID: GPU-685c9973-bece-68da-c697-474881571cee)
+GPU 1: NVIDIA A100-SXM4-40GB (UUID: GPU-f60893db-9b34-48da-859c-ad6639f545ef)
+NAME                  ID              SIZE      MODIFIED     
+qwen3.5:9b            6488c96fa5fa    6.6 GB    2 hours ago     
+qwen2.5-coder:7b      dae161e27b0e    4.7 GB    29 hours ago    
+qwen2.5-coder:3b      f72c60cabf62    1.9 GB    29 hours ago    
+qwen2.5:7b            845dbda0ea48    4.7 GB    29 hours ago    
+qwen2.5:3b            357c53fb659c    1.9 GB    29 hours ago    
+llama3.2:3b           a80c4f17acd5    2.0 GB    29 hours ago    
+gemma3:12b            f4031aab637d    8.1 GB    3 days ago      
+qwen3:14b             bdbd181c33f2    9.3 GB    3 days ago      
+mistral-nemo:12b      e7e06d107c6c    7.1 GB    3 days ago      
+qwen2.5-coder:0.5b    4ff64a7f502a    397 MB    4 days ago      
+gemma3:1b             8648f39daa8f    815 MB    4 days ago      
+qwen2.5-coder:1.5b    d7372fd82851    986 MB    4 days ago      
+NAME    ID    SIZE    PROCESSOR    CONTEXT    UNTIL 
+               total        used        free      shared  buff/cache   available
+Mem:            14Gi       2.7Gi       1.7Gi       5.4Mi        10Gi        12Gi
+Swap:          4.0Gi       308Mi       3.7Gi
+Filesystem                         Size  Used Avail Use% Mounted on
+/dev/mapper/ubuntu--vg-ubuntu--lv   57G   28G   27G  51% /
+/dev/sdb1                           98G   48G   46G  52% /mnt/ai-data
+● ollama.service - Ollama Service
+     Loaded: loaded (/etc/systemd/system/ollama.service; enabled; preset: enabled)
+    Drop-In: /etc/systemd/system/ollama.service.d
+             └─override.conf
+     Active: active (running) since Tue 2026-09-15 12:21:48 UTC; 3h 33min ago
+ Invocation: e027be2401c2409a854cab779fbc354f
+   Main PID: 1188 (ollama)
+      Tasks: 15 (limit: 13862)
+     Memory: 6.9G (peak: 11.7G, swap: 3M, swap peak: 1.7G)
+        CPU: 1h 44min 43.468s
+     CGroup: /system.slice/ollama.service
+             └─1188 /usr/local/bin/ollama serve
+
+Sep 15 14:03:41 brain2 ollama[1188]: slot print_timing: id  0 | task 0 |       total time =    4941.03 ms /   301 tokens
+Sep 15 14:03:41 brain2 ollama[1188]: slot print_timing: id  0 | task 0 |    graphs reused =        281
+Sep 15 14:03:41 brain2 ollama[1188]: slot      release: id  0 | task 0 | stop processing: n_tokens = 300, truncated = 0
+Sep 15 14:03:41 brain2 ollama[1188]: srv  update_slots: all slots are idle
+Sep 15 14:03:41 brain2 ollama[1188]: [GIN] 2026/09/15 - 14:03:41 | 200 | 44.794078613s |       127.0.0.1 | POST     "/api/chat"
+Sep 15 15:48:33 brain2 ollama[1188]: time=2026-09-15T15:48:33.148Z level=INFO source=model_recommendations.go:177 msg="model recommendations cache sleep scheduled" wait=4h34m29.374340542s consecutive_failures=0
+Sep 15 15:55:05 brain2 ollama[1188]: [GIN] 2026/09/15 - 15:55:05 | 200 |      32.339µs |       127.0.0.1 | HEAD     "/"
+Sep 15 15:55:05 brain2 ollama[1188]: [GIN] 2026/09/15 - 15:55:05 | 200 |     985.329µs |       127.0.0.1 | GET      "/api/tags"
+Sep 15 15:55:05 brain2 ollama[1188]: [GIN] 2026/09/15 - 15:55:05 | 200 |        27.6µs |       127.0.0.1 | HEAD     "/"
+Sep 15 15:55:05 brain2 ollama[1188]: [GIN] 2026/09/15 - 15:55:05 | 200 |       23.48µs |       127.0.0.1 | GET      "/api/ps"
+Environment=PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin OLLAMA_MODELS=/mnt/ai-data/ollama/models OLLAMA_HOST=127.0.0.1:11434 OLLAMA_MAX_LOADED_MODELS=1 OLLAMA_NUM_PARALLEL=2 OLLAMA_KEEP_ALIVE=30m
+# /etc/systemd/system/ollama.service
+[Unit]
+Description=Ollama Service
+After=network-online.target
+
+[Service]
+ExecStart=/usr/local/bin/ollama serve
+User=ollama
+Group=ollama
+Restart=always
+RestartSec=3
+Environment="PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin"
+
+[Install]
+WantedBy=default.target
+
+# /etc/systemd/system/ollama.service.d/override.conf
+[Service]
+Environment="OLLAMA_MODELS=/mnt/ai-data/ollama/models"
+Environment="OLLAMA_HOST=127.0.0.1:11434"
+Environment="OLLAMA_MAX_LOADED_MODELS=1"
+Environment="OLLAMA_NUM_PARALLEL=2"
+Environment="OLLAMA_KEEP_ALIVE=30m"
+
+[embed service]
+
+[containers]
+CONTAINER ID   IMAGE                                           COMMAND                  CREATED        STATUS                 PORTS                      NAMES
+1fdc4be813a6   prom/prometheus:v3.8.1                          "/bin/prometheus --c…"   2 hours ago    Up 2 hours             127.0.0.1:9090->9090/tcp   prometheus
+8031ebe343b6   grafana/grafana:12.3.1                          "/run.sh"                2 hours ago    Up 2 hours             127.0.0.1:3001->3000/tcp   grafana
+f9039720f4db   gcr.io/cadvisor/cadvisor:v0.55.1                "/usr/bin/cadvisor -…"   2 hours ago    Up 2 hours (healthy)   8080/tcp                   cadvisor
+fc43e615328d   prom/node-exporter:v1.10.2                      "/bin/node_exporter …"   2 hours ago    Up 2 hours             9100/tcp                   node-exporter
+f2d882c07ed3   apache/tika:3.2.3.0                             "/bin/sh -c 'exec ja…"   2 hours ago    Up 2 hours             127.0.0.1:9998->9998/tcp   tika
+9ac1e7fb1a44   docker.litellm.ai/berriai/litellm:main-latest   "docker/prod_entrypo…"   26 hours ago   Up 2 hours                                        litellm
+eac50a38f1de   ghcr.io/open-webui/open-webui:main              "bash start.sh"          4 days ago     Up 4 hours (healthy)                              open-webui
+
+[monitoring compose]
+NAME            IMAGE                              COMMAND                  SERVICE         CREATED       STATUS                 PORTS
+cadvisor        gcr.io/cadvisor/cadvisor:v0.55.1   "/usr/bin/cadvisor -…"   cadvisor        2 hours ago   Up 2 hours (healthy)   8080/tcp
+grafana         grafana/grafana:12.3.1             "/run.sh"                grafana         2 hours ago   Up 2 hours             127.0.0.1:3001->3000/tcp
+node-exporter   prom/node-exporter:v1.10.2         "/bin/node_exporter …"   node-exporter   2 hours ago   Up 2 hours             9100/tcp
+prometheus      prom/prometheus:v3.8.1             "/bin/prometheus --c…"   prometheus      2 hours ago   Up 2 hours             127.0.0.1:9090->9090/tcp
+
+[listeners]
+State  Recv-Q Send-Q               Local Address:Port  Peer Address:PortProcess
+LISTEN 0      4096                 100.77.252.45:46405      0.0.0.0:*          
+LISTEN 0      4096                       0.0.0.0:22         0.0.0.0:*          
+LISTEN 0      2048                       0.0.0.0:8080       0.0.0.0:*          
+LISTEN 0      2048                     127.0.0.1:4000       0.0.0.0:*          
+LISTEN 0      4096                 100.77.252.45:443        0.0.0.0:*          
+LISTEN 0      4096                     127.0.0.1:11434      0.0.0.0:*          
+LISTEN 0      4096                     127.0.0.1:3001       0.0.0.0:*          
+LISTEN 0      4096                 127.0.0.53%lo:53         0.0.0.0:*          
+LISTEN 0      4096                     127.0.0.1:9998       0.0.0.0:*          
+LISTEN 0      4096                    127.0.0.54:53         0.0.0.0:*          
+LISTEN 0      4096                     127.0.0.1:9090       0.0.0.0:*          
+LISTEN 0      4096   [fd7a:115c:a1e0::b836:fc2e]:443           [::]:*          
+LISTEN 0      4096   [fd7a:115c:a1e0::b836:fc2e]:58190         [::]:*          
+LISTEN 0      4096                          [::]:22            [::]:*          
+
+[project files]
+/home/jorola/i3s_ai_ops/gpu_split_upgrade/baseline.txt
+/home/jorola/i3s_ai_ops/gpu_split_upgrade/baseline_after_qwen_download.txt
+/home/jorola/i3s_ai_ops/gpu_split_upgrade/benchmark_qwen35.sh
+/home/jorola/i3s_ai_ops/gpu_split_upgrade/litellm_config_before_i3s_main.yaml
+/home/jorola/i3s_ai_ops/gpu_split_upgrade/ollama-embed.service
+/home/jorola/i3s_ai_ops/gpu_split_upgrade/ollama_a100_override_proposed.conf
+/home/jorola/i3s_ai_ops/gpu_split_upgrade/ollama_override_before_a100.conf
+/home/jorola/i3s_ai_ops/gpu_split_upgrade/open_webui_rag_manual_settings.txt
+/home/jorola/i3s_ai_ops/gpu_split_upgrade/qwen35_9b_benchmark.csv
+/home/jorola/i3s_ai_ops/gpu_split_upgrade/qwen35_9b_benchmark.txt
+/home/jorola/i3s_ai_ops/gpu_split_upgrade/resume_baseline.txt
+/home/jorola/i3s_ai_ops/gpu_split_upgrade/tika-compose.yml
+/home/jorola/i3s_ai_ops/gpu_split_upgrade/tool_permission_findings.txt
+/home/jorola/i3s_ai_ops/monitoring/docker-compose.yml
+/home/jorola/i3s_ai_ops/monitoring/grafana.env
+/home/jorola/i3s_ai_ops/monitoring/grafana/dashboards/gpu.json
+/home/jorola/i3s_ai_ops/monitoring/grafana/dashboards/host.json
+/home/jorola/i3s_ai_ops/monitoring/grafana/dashboards/llm.json
+/home/jorola/i3s_ai_ops/monitoring/grafana/provisioning/dashboards/dashboards.yml
+/home/jorola/i3s_ai_ops/monitoring/grafana/provisioning/datasources/prometheus.yml
+/home/jorola/i3s_ai_ops/monitoring/prometheus.yml
+/home/jorola/i3s_ai_ops/monitoring/rules/alerts.yml

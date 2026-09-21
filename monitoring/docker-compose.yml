@@ -1,0 +1,90 @@
+services:
+  prometheus:
+    image: prom/prometheus:v3.8.1
+    container_name: prometheus
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:9090:9090"
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - ./rules:/etc/prometheus/rules:ro
+      - prometheus_data:/prometheus
+  grafana:
+    image: grafana/grafana:12.3.1
+    container_name: grafana
+    restart: unless-stopped
+    env_file: grafana.env
+    ports:
+      - "127.0.0.1:3001:3000"
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./grafana/provisioning:/etc/grafana/provisioning:ro
+      - ./grafana/dashboards:/var/lib/grafana/dashboards:ro
+  loki:
+    image: grafana/loki:3.7.2
+    container_name: loki
+    restart: unless-stopped
+    command: ["-config.file=/etc/loki/config.yml"]
+    ports: ["127.0.0.1:3100:3100"]
+    volumes:
+      - ./loki/config.yml:/etc/loki/config.yml:ro
+      - loki_data:/loki
+    read_only: true
+    tmpfs: ["/tmp:rw,noexec,nosuid,size=64m"]
+    security_opt: [no-new-privileges:true]
+    cap_drop: [ALL]
+    mem_limit: 1g
+    cpus: 1.0
+  alloy:
+    image: grafana/alloy:v1.19.2
+    container_name: alloy
+    restart: unless-stopped
+    command: ["run", "--storage.path=/var/lib/alloy/data", "/etc/alloy/config.alloy"]
+    volumes:
+      - ./alloy/config.alloy:/etc/alloy/config.alloy:ro
+      - alloy_data:/var/lib/alloy/data
+      - /var/lib/docker/containers:/var/lib/docker/containers:ro
+      - /var/log/journal:/var/log/journal:ro
+      - /run/log/journal:/run/log/journal:ro
+    depends_on: [loki]
+    # Alloy's official image runs non-root; root is required only to retain
+    # offsets in its named volume and read root-owned journal/log files.
+    user: "0:0"
+    # Alloy creates internal runtime state before components start. Its host log
+    # and journal inputs are nevertheless all mounted read-only.
+    tmpfs: ["/tmp:rw,noexec,nosuid,size=64m"]
+    security_opt: [no-new-privileges:true]
+    cap_drop: [ALL]
+    # Required to traverse root-owned journal files; all host sources are ro.
+    cap_add: [DAC_OVERRIDE]
+    mem_limit: 512m
+    cpus: 0.5
+  node-exporter:
+    image: prom/node-exporter:v1.10.2
+    container_name: node-exporter
+    restart: unless-stopped
+    command:
+      - '--path.rootfs=/host'
+      - '--collector.textfile.directory=/textfile'
+    volumes:
+      - /:/host:ro,rslave
+      - ./node-textfile:/textfile:ro
+  cadvisor:
+    image: gcr.io/cadvisor/cadvisor:v0.55.1
+    container_name: cadvisor
+    restart: unless-stopped
+    privileged: true
+    devices:
+      - /dev/kmsg:/dev/kmsg
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:ro
+      - /sys:/sys:ro
+      - /var/lib/docker:/var/lib/docker:ro
+      - /dev/disk:/dev/disk:ro
+
+volumes:
+  prometheus_data:
+  grafana_data:
+  loki_data:
+  alloy_data:

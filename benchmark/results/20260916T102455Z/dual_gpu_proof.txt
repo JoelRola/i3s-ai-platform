@@ -1,0 +1,1 @@
+PASS: simultaneous generation and embedding completed. generation_latency_s=57.647; generation_tok_s=60.128; embedding_latency_s=57.648; A100_peak_util=100.0; P100_peak_util=100.0; embedding_count=24.

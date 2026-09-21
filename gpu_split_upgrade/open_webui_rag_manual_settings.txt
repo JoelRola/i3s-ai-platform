@@ -1,0 +1,11 @@
+Open WebUI requires supported Admin UI configuration; its SQLite database was not edited.
+
+Admin Panel -> Settings -> Documents (or the corresponding RAG / Document settings page):
+  Content extraction engine: Apache Tika
+  Tika endpoint: http://127.0.0.1:9998
+  Embedding engine: Ollama
+  Ollama embedding endpoint: http://127.0.0.1:11435
+  Embedding model: qwen3-embedding:4b
+
+Save the settings after the P100 embedding service and model are available.  Existing
+documents indexed with a previous embedding model should be re-indexed.

@@ -1,0 +1,40 @@
+Sep 16 10:24:56 brain2 ollama[1201]: time=2026-09-16T10:24:56.981Z level=INFO source=sched.go:620 msg="gpu memory" id=0 library=CUDA available="15.2 GiB" free="15.6 GiB" minimum="457.0 MiB" overhead="0 B"
+Sep 16 10:24:57 brain2 ollama[1201]: cmn  common_param:   - CUDA0   : Tesla P100-PCIE-16GB (16269 MiB, 16011 MiB free)
+Sep 16 10:24:57 brain2 ollama[1201]: common_memory_breakdown_print: |   - CUDA0 (P100-PCIE-16GB) | 16269 = 16011 + (4172 =  2375 +     576 +    1220) +       -3914 |
+Sep 16 10:24:57 brain2 ollama[1202]: time=2026-09-16T10:24:57.623Z level=INFO source=sched.go:620 msg="gpu memory" id=0 library=CUDA available="38.6 GiB" free="39.1 GiB" minimum="457.0 MiB" overhead="0 B"
+Sep 16 10:24:57 brain2 ollama[1201]: llama_model_loader: - kv   3:                           general.basename str              = Qwen3-Embedding
+Sep 16 10:24:57 brain2 ollama[1201]: llama_prepare_model_devices: using device CUDA0 (Tesla P100-PCIE-16GB) (0000:00:10.0) - 16011 MiB free
+Sep 16 10:24:57 brain2 ollama[1202]: cmn  common_param:   - CUDA0   : NVIDIA A100-SXM4-40GB (40440 MiB, 40015 MiB free)
+Sep 16 10:24:59 brain2 ollama[1202]: common_memory_breakdown_print: |   - CUDA0 (A100-SXM4-40GB) | 40440 = 39963 + (6031 =  4717 +    1074 +     240) +       -5554 |
+Sep 16 10:24:59 brain2 ollama[1202]: llama_prepare_model_devices: using device CUDA0 (NVIDIA A100-SXM4-40GB) (0000:00:11.0) - 40015 MiB free
+Sep 16 10:25:00 brain2 ollama[1201]: load_tensors:        CUDA0 model buffer size =  2375.37 MiB
+Sep 16 10:25:00 brain2 ollama[1202]: load_tensors:        CUDA0 model buffer size =  4717.38 MiB
+Sep 16 10:25:13 brain2 ollama[1201]: llama_kv_cache:      CUDA0 KV buffer size =   576.00 MiB
+Sep 16 10:25:13 brain2 ollama[1201]: sched_reserve:      CUDA0 compute buffer size =  1220.93 MiB
+Sep 16 10:25:14 brain2 ollama[1201]: time=2026-09-16T10:25:14.187Z level=INFO source=images.go:424 msg="template selection" model=registry.ollama.ai/library/qwen3-embedding:4b selected=gguf_chat_template renderer="" parser="" go_template=null chat_template="[tools embedding]" harmony=null renderer_parser=null
+Sep 16 10:25:26 brain2 ollama[1202]: llama_kv_cache:      CUDA0 KV buffer size =  1024.00 MiB
+Sep 16 10:25:26 brain2 ollama[1202]: llama_memory_recurrent:      CUDA0 RS buffer size =    50.25 MiB
+Sep 16 10:25:26 brain2 ollama[1202]: sched_reserve:      CUDA0 compute buffer size =   240.03 MiB
+Sep 16 10:25:26 brain2 ollama[1202]: clip_ctx: CLIP using CUDA0 backend
+Sep 16 10:25:33 brain2 ollama[1202]: reserve_compute_meta:      CUDA0 compute buffer size =   248.10 MiB
+Sep 16 10:25:33 brain2 ollama[1202]: time=2026-09-16T10:25:33.532Z level=INFO source=images.go:424 msg="template selection" model=registry.ollama.ai/library/qwen3.5:9b selected=renderer_parser renderer=qwen3.5 parser=qwen3.5 go_template=null chat_template="[tools thinking completion vision]" harmony=null renderer_parser="[completion vision tools thinking]"
+Sep 16 10:40:09 brain2 ollama[1201]: time=2026-09-16T10:40:09.654Z level=INFO source=sched.go:620 msg="gpu memory" id=0 library=CUDA available="15.2 GiB" free="15.6 GiB" minimum="457.0 MiB" overhead="0 B"
+Sep 16 10:40:09 brain2 ollama[1201]: cmn  common_param:   - CUDA0   : Tesla P100-PCIE-16GB (16269 MiB, 16011 MiB free)
+Sep 16 10:40:10 brain2 ollama[1201]: common_memory_breakdown_print: |   - CUDA0 (P100-PCIE-16GB) | 16269 = 16011 + (4172 =  2375 +     576 +    1220) +       -3914 |
+Sep 16 10:40:10 brain2 ollama[1201]: llama_model_loader: - kv   3:                           general.basename str              = Qwen3-Embedding
+Sep 16 10:40:10 brain2 ollama[1201]: llama_prepare_model_devices: using device CUDA0 (Tesla P100-PCIE-16GB) (0000:00:10.0) - 16011 MiB free
+Sep 16 10:40:10 brain2 ollama[1201]: load_tensors:        CUDA0 model buffer size =  2375.37 MiB
+Sep 16 10:40:23 brain2 ollama[1201]: llama_kv_cache:      CUDA0 KV buffer size =   576.00 MiB
+Sep 16 10:40:23 brain2 ollama[1201]: sched_reserve:      CUDA0 compute buffer size =  1220.93 MiB
+Sep 16 10:40:24 brain2 ollama[1201]: time=2026-09-16T10:40:24.131Z level=INFO source=images.go:424 msg="template selection" model=registry.ollama.ai/library/qwen3-embedding:4b selected=gguf_chat_template renderer="" parser="" go_template=null chat_template="[tools embedding]" harmony=null renderer_parser=null
+Sep 16 11:05:26 brain2 ollama[1202]: time=2026-09-16T11:05:26.372Z level=INFO source=sched.go:620 msg="gpu memory" id=0 library=CUDA available="38.6 GiB" free="39.1 GiB" minimum="457.0 MiB" overhead="0 B"
+Sep 16 11:05:26 brain2 ollama[1202]: cmn  common_param:   - CUDA0   : NVIDIA A100-SXM4-40GB (40440 MiB, 40015 MiB free)
+Sep 16 11:05:27 brain2 ollama[1202]: common_memory_breakdown_print: |   - CUDA0 (A100-SXM4-40GB) | 40440 = 39963 + (5487 =  4717 +     562 +     208) +       -5010 |
+Sep 16 11:05:28 brain2 ollama[1202]: llama_prepare_model_devices: using device CUDA0 (NVIDIA A100-SXM4-40GB) (0000:00:11.0) - 40015 MiB free
+Sep 16 11:05:28 brain2 ollama[1202]: load_tensors:        CUDA0 model buffer size =  4717.38 MiB
+Sep 16 11:05:54 brain2 ollama[1202]: llama_kv_cache:      CUDA0 KV buffer size =   512.00 MiB
+Sep 16 11:05:54 brain2 ollama[1202]: llama_memory_recurrent:      CUDA0 RS buffer size =    50.25 MiB
+Sep 16 11:05:54 brain2 ollama[1202]: sched_reserve:      CUDA0 compute buffer size =   208.03 MiB
+Sep 16 11:05:54 brain2 ollama[1202]: clip_ctx: CLIP using CUDA0 backend
+Sep 16 11:06:00 brain2 ollama[1202]: reserve_compute_meta:      CUDA0 compute buffer size =   248.10 MiB
+Sep 16 11:06:01 brain2 ollama[1202]: time=2026-09-16T11:06:01.217Z level=INFO source=images.go:424 msg="template selection" model=registry.ollama.ai/library/qwen3.5:9b selected=renderer_parser renderer=qwen3.5 parser=qwen3.5 go_template=null chat_template="[tools thinking completion vision]" harmony=null renderer_parser="[completion vision tools thinking]"

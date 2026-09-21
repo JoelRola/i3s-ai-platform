@@ -1,0 +1,30 @@
+Open WebUI image: ghcr.io/open-webui/open-webui:main (sha256:1a6399d237dc392a2313e0ca826020b3fd5d22536357840eb63393d18dc8b924)
+
+Cause identified by read-only inspection:
+- calendar.enable=true
+- automations.enable=true
+- code_execution.enable=true
+- code_interpreter.enable=true
+- chat.tool_permissions.enable=false
+- subagents.enable=false
+- web.search.enable=false in persisted global config (despite the current UI claim; verify after applying settings)
+- No user-installed Tools or Functions records were present.
+
+This makes built-in consequential capabilities available without per-chat capability
+gating. The database was not changed.
+
+Required supported Admin UI changes (Admin Panel -> Settings):
+1. Features: turn off Calendar and Automations.
+2. Code Execution / Code Interpreter: turn both off.
+3. Chat: turn on Tool Permissions.
+4. Web Search: leave on / explicitly enable it, then save.
+5. For i3s-main, i3s-fast, i3s-balanced, i3s-coding, and i3s-diagrams,
+   open the model's tool/capability assignment and allow only Web Search and
+   document/file retrieval where appropriate. Do not assign Calendar,
+   Automations, Tasks, Code Execution, Code Interpreter, Terminal, or external
+   action tools. i3s-diagrams gets no action tools.
+6. Test with: Tell me a really complex folk story.
+   Expected: story text only; no tool/function JSON and no calendar/automation action.
+
+Because these are global Admin UI settings in the installed Open WebUI main image,
+changing them via direct SQLite edits is intentionally not supported here.

@@ -1,0 +1,1 @@
+[{"Type":"volume","Name":"open-webui","Source":"/var/lib/docker/volumes/open-webui/_data","Destination":"/app/backend/data","Driver":"local","Mode":"z","RW":true,"Propagation":""}]

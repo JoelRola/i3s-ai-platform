@@ -1,0 +1,45 @@
+I3S AI benchmark-upgrade baseline
+Captured: 2026-09-14T15:31:06+00:00
+Hostname: brain2
+
+Disk usage
+/              57G total, 26G used, 30G available (47%)
+/mnt/ai-data   98G total, 40G used, 54G available (43%)
+
+RAM
+14 GiB total; 1.7 GiB used; 13 GiB available; swap 4.0 GiB total, 376 MiB used.
+
+GPU
+NVIDIA Tesla P100-PCIE-16GB; driver 580.178.04; CUDA 13.0.
+At capture: 0 MiB / 16384 MiB VRAM used, 0% GPU utilisation, 25 W, 43 C; no GPU processes.
+
+Ollama
+Loaded models: none.
+Installed models: qwen2.5-coder:7b, qwen2.5-coder:3b, qwen2.5:7b,
+qwen2.5:3b, llama3.2:3b, gemma3:12b, qwen3:14b, mistral-nemo:12b,
+qwen2.5-coder:0.5b, gemma3:1b, qwen2.5-coder:1.5b.
+Environment: OLLAMA_MODELS=/mnt/ai-data/ollama/models;
+OLLAMA_HOST=127.0.0.1:11434; OLLAMA_MAX_LOADED_MODELS=1;
+OLLAMA_NUM_PARALLEL=2; OLLAMA_KEEP_ALIVE=3m.
+
+Docker
+open-webui: running, healthy, restart count 0.
+litellm: running, restart count 0.
+docker ps showed litellm Up 2 hours and open-webui Up About an hour (healthy).
+
+LiteLLM /v1/models (credential intentionally omitted)
+i3s-fast
+i3s-balanced
+i3s-coding
+i3s-diagrams
+
+Existing operational files at capture
+README.md, ai_status.sh, gateway_eval.py, gateway_eval_results.csv,
+gateway_eval_responses.jsonl, gateway_eval_run.log, ops_common.py,
+status_after_eval.txt, status_initial.txt, status_latest.txt, status_report.py,
+tester_feedback.csv, tester_instructions.md, watch_ai.sh, watch_sample.txt.
+
+Collection commands used: hostname; date; df -h / /mnt/ai-data; free -h;
+nvidia-smi; ollama list; ollama ps; systemctl show ollama -p Environment;
+docker ps; docker inspect open-webui litellm; LiteLLM GET /v1/models.
+No configuration or service changes were made while collecting this baseline.

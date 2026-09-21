@@ -1,0 +1,17 @@
+{
+  "connection": {
+    "id": "i3s-file-generator",
+    "name": "I3S File Generator",
+    "url": "http://172.21.0.2:8081",
+    "path": "/openapi.json",
+    "type": "openapi",
+    "auth_type": "bearer",
+    "enabled": true,
+    "key": "[REDACTED]"
+  },
+  "discovered_operations": [
+    "create_docx", "create_xlsx", "create_pptx", "create_pdf",
+    "create_csv", "create_text_file", "create_chart"
+  ],
+  "installed_build_limitation": "Open WebUI 0.11.3 resolves stored OpenAPI External Tool Servers only from client-supplied metadata.tool_servers (direct tool servers). meta.toolIds resolves database tools; no server-side OpenAPI tool-ID mapping or model-default assignment exists."
+}

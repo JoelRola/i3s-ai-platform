@@ -1,0 +1,13 @@
+{
+  "request_count": 15,
+  "success_count": 15,
+  "error_count": 0,
+  "error_rate": 0.0,
+  "p50_TTFT": 0.5843,
+  "p95_TTFT": 0.5998,
+  "p50_total_latency": 2.9681,
+  "p95_total_latency": 18.0091,
+  "mean_tokens_per_second": 59.5031,
+  "p50_tokens_per_second": 60.357,
+  "p95_tokens_per_second": 62.231
+}

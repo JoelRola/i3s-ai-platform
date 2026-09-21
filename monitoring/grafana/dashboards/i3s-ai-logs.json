@@ -1,0 +1,9 @@
+{
+  "annotations":{"list":[]},"editable":false,"schemaVersion":41,"tags":["i3s","logs"],"title":"I3S AI Logs","uid":"i3s-ai-logs","version":1,
+  "panels":[
+    {"id":1,"type":"logs","title":"Recent AI service errors","datasource":{"type":"loki","uid":"loki"},"targets":[{"refId":"A","expr":"{host=\"i3s-ai\"} |~ \"(?i)error|exception|failed|http.*5[0-9]{2}\""}],"gridPos":{"h":10,"w":12,"x":0,"y":0}},
+    {"id":2,"type":"logs","title":"Toolbox failures and HTTP 422/500","datasource":{"type":"loki","uid":"loki"},"targets":[{"refId":"A","expr":"{host=\"i3s-ai\"} |~ \"(?i)i3s-file-service|toolbox|HTTP.?422|HTTP.?500\""}],"gridPos":{"h":10,"w":12,"x":12,"y":0}},
+    {"id":3,"type":"logs","title":"Authentication failures","datasource":{"type":"loki","uid":"loki"},"targets":[{"refId":"A","expr":"{host=\"i3s-ai\"} |~ \"(?i)unauthorized|forbidden|authentication failed|HTTP.?401|HTTP.?403\""}],"gridPos":{"h":10,"w":12,"x":0,"y":10}},
+    {"id":4,"type":"logs","title":"Ollama events / restarts","datasource":{"type":"loki","uid":"loki"},"targets":[{"refId":"A","expr":"{service=\"ollama\"} |~ \"(?i)started|stopped|restart|error|panic\""}],"gridPos":{"h":10,"w":12,"x":12,"y":10}}
+  ]
+}

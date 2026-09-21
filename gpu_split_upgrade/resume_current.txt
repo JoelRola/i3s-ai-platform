@@ -1,0 +1,123 @@
+Tue Sep 15 16:14:34 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 580.178.04             Driver Version: 580.178.04     CUDA Version: 13.0     |
++-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  Tesla P100-PCIE-16GB           Off |   00000000:00:10.0 Off |                    0 |
+| N/A   42C    P0             25W /  250W |       0MiB /  16384MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+|   1  NVIDIA A100-SXM4-40GB          Off |   00000000:00:11.0 Off |                    0 |
+| N/A   45C    P0             59W /  400W |       0MiB /  40960MiB |      0%      Default |
+|                                         |                        |             Disabled |
++-----------------------------------------+------------------------+----------------------+
+
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+GPU 0: Tesla P100-PCIE-16GB (UUID: GPU-685c9973-bece-68da-c697-474881571cee)
+GPU 1: NVIDIA A100-SXM4-40GB (UUID: GPU-f60893db-9b34-48da-859c-ad6639f545ef)
+NAME    ID    SIZE    PROCESSOR    CONTEXT    UNTIL 
+NAME                  ID              SIZE      MODIFIED     
+qwen3.5:9b            6488c96fa5fa    6.6 GB    3 hours ago     
+qwen2.5-coder:7b      dae161e27b0e    4.7 GB    29 hours ago    
+qwen2.5-coder:3b      f72c60cabf62    1.9 GB    29 hours ago    
+qwen2.5:7b            845dbda0ea48    4.7 GB    29 hours ago    
+qwen2.5:3b            357c53fb659c    1.9 GB    30 hours ago    
+llama3.2:3b           a80c4f17acd5    2.0 GB    30 hours ago    
+gemma3:12b            f4031aab637d    8.1 GB    3 days ago      
+qwen3:14b             bdbd181c33f2    9.3 GB    3 days ago      
+mistral-nemo:12b      e7e06d107c6c    7.1 GB    3 days ago      
+qwen2.5-coder:0.5b    4ff64a7f502a    397 MB    4 days ago      
+gemma3:1b             8648f39daa8f    815 MB    4 days ago      
+qwen2.5-coder:1.5b    d7372fd82851    986 MB    4 days ago      
+● ollama.service - Ollama Service
+     Loaded: loaded (/etc/systemd/system/ollama.service; enabled; preset: enabled)
+    Drop-In: /etc/systemd/system/ollama.service.d
+             └─override.conf
+     Active: active (running) since Tue 2026-09-15 16:07:38 UTC; 6min ago
+ Invocation: de570c3ba2604208888028b2486ae03e
+   Main PID: 67068 (ollama)
+      Tasks: 11 (limit: 13862)
+     Memory: 290.1M (peak: 567.9M)
+        CPU: 5.693s
+     CGroup: /system.slice/ollama.service
+             └─67068 /usr/local/bin/ollama serve
+
+Sep 15 16:09:54 brain2 ollama[67068]: [GIN] 2026/09/15 - 16:09:54 | 200 |     904.231µs |       127.0.0.1 | GET      "/api/tags"
+Sep 15 16:09:54 brain2 ollama[67068]: [GIN] 2026/09/15 - 16:09:54 | 200 |       20.56µs |       127.0.0.1 | GET      "/api/ps"
+Sep 15 16:09:59 brain2 ollama[67068]: [GIN] 2026/09/15 - 16:09:59 | 200 |       842.3µs |       127.0.0.1 | GET      "/api/tags"
+Sep 15 16:09:59 brain2 ollama[67068]: [GIN] 2026/09/15 - 16:09:59 | 200 |       10.98µs |       127.0.0.1 | GET      "/api/ps"
+Sep 15 16:10:03 brain2 ollama[67068]: [GIN] 2026/09/15 - 16:10:03 | 200 |      872.07µs |       127.0.0.1 | GET      "/api/tags"
+Sep 15 16:10:03 brain2 ollama[67068]: [GIN] 2026/09/15 - 16:10:03 | 200 |      20.939µs |       127.0.0.1 | GET      "/api/ps"
+Sep 15 16:14:34 brain2 ollama[67068]: [GIN] 2026/09/15 - 16:14:34 | 200 |      39.699µs |       127.0.0.1 | HEAD     "/"
+Sep 15 16:14:34 brain2 ollama[67068]: [GIN] 2026/09/15 - 16:14:34 | 200 |      14.988µs |       127.0.0.1 | GET      "/api/ps"
+Sep 15 16:14:34 brain2 ollama[67068]: [GIN] 2026/09/15 - 16:14:34 | 200 |       45.76µs |       127.0.0.1 | HEAD     "/"
+Sep 15 16:14:34 brain2 ollama[67068]: [GIN] 2026/09/15 - 16:14:34 | 200 |     754.062µs |       127.0.0.1 | GET      "/api/tags"
+● ollama-embed.service - Ollama Embedding Service (P100)
+     Loaded: loaded (/etc/systemd/system/ollama-embed.service; enabled; preset: enabled)
+     Active: active (running) since Tue 2026-09-15 16:07:39 UTC; 6min ago
+ Invocation: 29430718e7244a978e8b3c6fdbd8757c
+   Main PID: 67169 (ollama)
+      Tasks: 10 (limit: 13862)
+     Memory: 358M (peak: 497.8M)
+        CPU: 3.748s
+     CGroup: /system.slice/ollama-embed.service
+             └─67169 /usr/local/bin/ollama serve
+
+Sep 15 16:07:39 brain2 ollama[67169]: time=2026-09-15T16:07:39.240Z level=INFO source=runner.go:60 msg="discovering available GPUs..."
+Sep 15 16:07:39 brain2 ollama[67169]: time=2026-09-15T16:07:39.240Z level=WARN source=runner.go:722 msg="user overrode visible devices" CUDA_VISIBLE_DEVICES=GPU-685c9973-bece-68da-c697-474881571cee
+Sep 15 16:07:39 brain2 ollama[67169]: time=2026-09-15T16:07:39.240Z level=WARN source=runner.go:726 msg="if GPUs are not correctly discovered, unset and try again"
+Sep 15 16:07:39 brain2 ollama[67169]: time=2026-09-15T16:07:39.245Z level=INFO source=model_list_cache.go:112 msg="model list cache hydration complete" models=12 failures=0 elapsed=8.181398ms
+Sep 15 16:07:39 brain2 ollama[67169]: time=2026-09-15T16:07:39.707Z level=INFO source=model_recommendations.go:177 msg="model recommendations cache sleep scheduled" wait=4h20m57.123692196s consecutive_failures=0
+Sep 15 16:07:41 brain2 ollama[67169]: time=2026-09-15T16:07:41.812Z level=INFO source=llama_server.go:295 msg="skipping CUDA device — compute capability not in compiled architectures" device="Tesla P100-PCIE-16GB" cc=600 archs="[750 800 860 870 890 900 1000 1030 1100 1200 1210]" libDirs="[/usr/local/lib/ollama /usr/local/lib/ollama/cuda_v13]"
+Sep 15 16:07:45 brain2 ollama[67169]: time=2026-09-15T16:07:45.139Z level=INFO source=types.go:32 msg="inference compute" id=1 filter_id=1 library=Vulkan compute=0.0 name=Vulkan1 description="NVIDIA A100-SXM4-40GB" libdirs=ollama,vulkan driver=0.0 pci_id=0000:00:11.0 type=discrete total="40.0 GiB" available="39.5 GiB"
+Sep 15 16:07:45 brain2 ollama[67169]: time=2026-09-15T16:07:45.139Z level=INFO source=types.go:32 msg="inference compute" id=0 filter_id=GPU-685c9973-bece-68da-c697-474881571cee library=CUDA compute=6.0 name=CUDA0 description="Tesla P100-PCIE-16GB" libdirs=ollama,cuda_v12 driver=13.0 pci_id=0000:00:10.0 type=discrete total="15.9 GiB" available="15.6 GiB"
+Sep 15 16:07:45 brain2 ollama[67169]: time=2026-09-15T16:07:45.139Z level=INFO source=routes.go:2072 msg="vram-based default context" total_vram="55.9 GiB" default_num_ctx=262144
+Sep 15 16:09:22 brain2 ollama[67169]: [GIN] 2026/09/15 - 16:09:22 | 200 |    2.199275ms |       127.0.0.1 | GET      "/api/tags"
+Environment=PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin OLLAMA_MODELS=/mnt/ai-data/ollama/models OLLAMA_HOST=127.0.0.1:11434 OLLAMA_MAX_LOADED_MODELS=1 OLLAMA_NUM_PARALLEL=2 OLLAMA_KEEP_ALIVE=30m CUDA_VISIBLE_DEVICES=GPU-f60893db-9b34-48da-859c-ad6639f545ef
+CONTAINER ID   IMAGE                                           COMMAND                  CREATED        STATUS                 PORTS                      NAMES
+1fdc4be813a6   prom/prometheus:v3.8.1                          "/bin/prometheus --c…"   2 hours ago    Up 2 hours             127.0.0.1:9090->9090/tcp   prometheus
+8031ebe343b6   grafana/grafana:12.3.1                          "/run.sh"                2 hours ago    Up 2 hours             127.0.0.1:3001->3000/tcp   grafana
+f9039720f4db   gcr.io/cadvisor/cadvisor:v0.55.1                "/usr/bin/cadvisor -…"   2 hours ago    Up 2 hours (healthy)   8080/tcp                   cadvisor
+fc43e615328d   prom/node-exporter:v1.10.2                      "/bin/node_exporter …"   2 hours ago    Up 2 hours             9100/tcp                   node-exporter
+f2d882c07ed3   apache/tika:3.2.3.0                             "/bin/sh -c 'exec ja…"   2 hours ago    Up 2 hours             127.0.0.1:9998->9998/tcp   tika
+9ac1e7fb1a44   docker.litellm.ai/berriai/litellm:main-latest   "docker/prod_entrypo…"   27 hours ago   Up 2 hours                                        litellm
+eac50a38f1de   ghcr.io/open-webui/open-webui:main              "bash start.sh"          4 days ago     Up 4 hours (healthy)                              open-webui
+NAME            IMAGE                              COMMAND                  SERVICE         CREATED       STATUS                 PORTS
+cadvisor        gcr.io/cadvisor/cadvisor:v0.55.1   "/usr/bin/cadvisor -…"   cadvisor        2 hours ago   Up 2 hours (healthy)   8080/tcp
+grafana         grafana/grafana:12.3.1             "/run.sh"                grafana         2 hours ago   Up 2 hours             127.0.0.1:3001->3000/tcp
+node-exporter   prom/node-exporter:v1.10.2         "/bin/node_exporter …"   node-exporter   2 hours ago   Up 2 hours             9100/tcp
+prometheus      prom/prometheus:v3.8.1             "/bin/prometheus --c…"   prometheus      2 hours ago   Up 2 hours             127.0.0.1:9090->9090/tcp
+Prometheus Server is Ready.
+HTTP/1.1 200 OK
+Cache-Control: no-store
+Content-Type: text/html; charset=UTF-8
+X-Content-Type-Options: nosniff
+X-Frame-Options: deny
+X-Xss-Protection: 1; mode=block
+Date: Tue, 15 Sep 2026 16:14:34 GMT
+
+State  Recv-Q Send-Q               Local Address:Port  Peer Address:PortProcess
+LISTEN 0      4096                 100.77.252.45:46405      0.0.0.0:*          
+LISTEN 0      4096                       0.0.0.0:22         0.0.0.0:*          
+LISTEN 0      2048                       0.0.0.0:8080       0.0.0.0:*          
+LISTEN 0      2048                     127.0.0.1:4000       0.0.0.0:*          
+LISTEN 0      4096                 100.77.252.45:443        0.0.0.0:*          
+LISTEN 0      4096                     127.0.0.1:11434      0.0.0.0:*          
+LISTEN 0      4096                     127.0.0.1:11435      0.0.0.0:*          
+LISTEN 0      4096                     127.0.0.1:3001       0.0.0.0:*          
+LISTEN 0      4096                 127.0.0.53%lo:53         0.0.0.0:*          
+LISTEN 0      4096                     127.0.0.1:9998       0.0.0.0:*          
+LISTEN 0      4096                    127.0.0.54:53         0.0.0.0:*          
+LISTEN 0      4096                     127.0.0.1:9090       0.0.0.0:*          
+LISTEN 0      4096   [fd7a:115c:a1e0::b836:fc2e]:443           [::]:*          
+LISTEN 0      4096   [fd7a:115c:a1e0::b836:fc2e]:58190         [::]:*          
+LISTEN 0      4096                          [::]:22            [::]:*          

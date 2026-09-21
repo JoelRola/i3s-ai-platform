@@ -1,0 +1,6 @@
+[Unit]
+Description=I3S NVIDIA and private service Prometheus textfile collector
+
+[Service]
+Type=oneshot
+ExecStart=/home/jorola/i3s_ai_ops/monitoring/nvidia_textfile_collector.sh

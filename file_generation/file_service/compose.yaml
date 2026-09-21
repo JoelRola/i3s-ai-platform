@@ -1,0 +1,31 @@
+services:
+  i3s-file-service:
+    build: .
+    image: i3s/file-service:local
+    container_name: i3s-file-service
+    restart: unless-stopped
+    environment:
+      I3S_FILE_SERVICE_KEY: ${I3S_FILE_SERVICE_KEY:?set in .env}
+      # Empty by default: transcription requires an explicitly staged local model.
+      WHISPER_MODEL_PATH: ${WHISPER_MODEL_PATH:-}
+      WHISPER_DEVICE: ${WHISPER_DEVICE:-cpu}
+      WHISPER_COMPUTE_TYPE: ${WHISPER_COMPUTE_TYPE:-int8}
+    volumes: [i3s-file-service-data:/data]
+    networks:
+      i3s_file_internal:
+        ipv4_address: 172.21.0.2
+    read_only: true
+    tmpfs:
+      - /tmp:rw,noexec,nosuid,size=256m
+    security_opt: [no-new-privileges:true]
+    cap_drop: [ALL]
+    pids_limit: 256
+    mem_limit: 3g
+    cpus: 2.0
+volumes:
+  i3s-file-service-data: {name: i3s-file-service-data}
+networks:
+  i3s_file_internal:
+    name: i3s-file-service-internal
+    internal: true
+    ipam: {config: [{subnet: 172.21.0.0/24}]}

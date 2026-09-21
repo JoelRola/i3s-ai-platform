@@ -1,0 +1,28 @@
+{
+  "model": {
+    "id": "i3s-work",
+    "base_model_id": "i3s-main",
+    "terminal": true,
+    "file_upload": true,
+    "builtin_tools": true,
+    "disabled_capabilities": ["web_search", "image_generation", "code_interpreter", "memory"],
+    "disabled_builtin_categories": ["notes", "web_search", "image_generation", "memory", "automations", "calendar", "channels", "subagents"]
+  },
+  "terminal_connection": {
+    "id": "i3s-work-files",
+    "name": "i3s-work files",
+    "enabled": true,
+    "url": "http://172.20.0.2:8000",
+    "path": "/openapi.json",
+    "auth_type": "bearer",
+    "access_grants": [{"principal_type": "user", "principal_id": "*", "permission": "read"}],
+    "chat_uploads": "filesystem",
+    "secret": "[REDACTED]"
+  },
+  "api_calls": [
+    "POST /api/v1/configs/terminal_servers/verify",
+    "POST /api/v1/configs/terminal_servers",
+    "POST /api/v1/models/model/update",
+    "POST /api/chat/completions with terminal_id=i3s-work-files"
+  ]
+}

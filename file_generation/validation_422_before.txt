@@ -1,0 +1,104 @@
+I3S File Generator XLSX 422 investigation — 2026-09-16
+
+Observed i3s-file-service access log entries:
+
+172.21.0.1 - POST /create_xlsx HTTP/1.1 -> 422 Unprocessable Entity
+(repeated; create_csv also returned 422, while create_text_file returned 200.)
+
+Exact 422 body status:
+
+FastAPI/Uvicorn's installed default access log records only method, path, and status.
+The current database-backed Tool proxy converts every non-200 service response to
+[{"error":"service HTTP <status>"}] and discards the service response body.
+Therefore the historical 422 JSON (`loc`, `msg`, `type`, `input`) is not present in
+either retained service logs or the proxy result and cannot be truthfully recreated.
+
+Schema evidence:
+
+Tool create_xlsx currently exposes: filename, sheets:list.
+Proxy currently posts: {"filename": filename, "sheets": sheets}.
+Service Xlsx requires: filename:str, sheets:list[Sheet].
+Service Sheet requires: columns:list[str]; optional name:str, rows:list[list[object]],
+formulas:dict[str,str].
+
+Canonical direct service validation performed in the isolated container:
+
+POST /create_xlsx with
+{
+  "filename": "contract_finance.xlsx",
+  "sheets": [{
+    "name": "Finance",
+    "columns": ["Month", "Revenue", "Expenses", "Profit"],
+    "rows": [["January",10000,7000], ["February",12000,8000], ["March",11000,6500], ["April",13000,9000], ["May",14000,9500]],
+    "formulas": {"D2":"=B2-C2","D3":"=B3-C3","D4":"=B4-C4","D5":"=B5-C5","D6":"=B6-C6"}
+  }]
+}
+
+Result: HTTP 200; response had two list items; second was an XLSX data URI;
+workbook reopened successfully; Finance!D2 was exactly =B2-C2; size 5032 bytes.
+
+Next safe step once authenticated Tool-update access is supplied:
+
+1. Update only the database-backed Tool to use a simple typed model-facing XLSX
+   interface: filename, sheet_name, columns, rows, formulas.
+2. Normalize that interface to the canonical service payload above.
+3. Preserve non-200 JSON bodies in a sanitized Tool error result, allowing the
+   next validation attempt to capture exact FastAPI loc/msg/type/input if any
+   remaining field is invalid.
+
+## Captured browser call and literal FastAPI response
+
+The supported Open WebUI admin chat-export endpoint returned the actual first
+browser Tool call. Its relevant arguments were:
+
+```json
+{
+  "filename": "test_finance.xlsx",
+  "sheets": [{
+    "name": "Finance",
+    "columns": ["Month", "Revenue", "Expenses", "Profit"],
+    "rows": ["January", "10000", "5000", "=C2-B2"],
+    "formulas": ["=C2-B2", "=C3-B3", "=C4-B4", "=C5-B5"]
+  }]
+}
+```
+
+Replaying that captured request against the isolated service produced the exact
+FastAPI 422 body:
+
+```json
+{
+  "detail": [
+    {"type":"list_type","loc":["body","sheets",0,"rows",0],"msg":"Input should be a valid list","input":"January"},
+    {"type":"list_type","loc":["body","sheets",0,"rows",1],"msg":"Input should be a valid list","input":"10000"},
+    {"type":"list_type","loc":["body","sheets",0,"rows",2],"msg":"Input should be a valid list","input":"5000"},
+    {"type":"list_type","loc":["body","sheets",0,"rows",3],"msg":"Input should be a valid list","input":"=C2-B2"},
+    {"type":"dict_type","loc":["body","sheets",0,"formulas"],"msg":"Input should be a valid dictionary","input":["=C2-B2","=C3-B3","=C4-B4","=C5-B5"]}
+  ]
+}
+```
+
+The model also retried with `sheets: ["Finance"]`; that cannot satisfy the
+service's required `Sheet` object.
+
+## Applied proxy contract fix
+
+The database-backed Tool was updated through `POST /api/v1/tools/id/i3s_file_generator/update`.
+No model, model assignment, Open WebUI service, Open Terminal service, or file
+service was changed.
+
+New model-facing XLSX mapping:
+
+| Model Tool argument | Proxy output | FastAPI field |
+| --- | --- | --- |
+| `filename` | validated `.xlsx` filename | `filename` |
+| `sheet_name` | `sheets[0].name` | `Sheet.name` |
+| `columns` | `sheets[0].columns` | `Sheet.columns` |
+| `rows` (row arrays) | normalized row arrays | `Sheet.rows` |
+| `formulas` (cell-to-formula object) | validated cell/formula object | `Sheet.formulas` |
+
+The updated typed Tool schema caused an authenticated `i3s-work` request to
+produce five nested row arrays and `{ "D2": "=B2-C2", ... }`, matching the
+canonical service contract. The exact persisted proxy source was executed from
+within the Open WebUI container against the isolated service: HTTP 200, valid
+`proxy_finance.xlsx`, correct XLSX data URI, and `Finance!D2 == "=B2-C2"`.

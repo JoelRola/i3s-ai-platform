@@ -1,0 +1,2 @@
+timestamp,model,quantisation_tag,gpu,prompt_tokens,output_tokens,context_request_size,concurrency,cold_or_warm,TTFT_seconds,total_latency_seconds,generation_tokens_per_second,prompt_eval_tokens_per_second,VRAM_peak_MiB,GPU_util_peak_percent,RAM_peak_MiB,success,http_status_error,error_type
+2026-09-16T10:51:03.474924+00:00,i3s-main/qwen3.5:9b,qwen3.5:9b,A100,776,16,short,1,warm,0.5978,21.8252,60.617,1302.127,7805.0,92.0,5389.0,True,,

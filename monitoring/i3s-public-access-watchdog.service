@@ -1,0 +1,7 @@
+[Unit]
+Description=I3S public access conservative availability monitor
+After=network-online.target tailscaled.service
+
+[Service]
+Type=oneshot
+ExecStart=/home/jorola/i3s_ai_ops/monitoring/public_access_watchdog.sh

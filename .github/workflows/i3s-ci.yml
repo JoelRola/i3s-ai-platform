@@ -1,0 +1,38 @@
+name: I3S CI
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - name: Python syntax
+        run: python -m compileall -q .
+      - name: Shell syntax
+        run: |
+          find . -type f -name '*.sh' -print0 | xargs -0 -r -n1 bash -n
+      - name: Configuration schema checks
+        run: |
+          python - <<'PY'
+          import json, pathlib
+          for path in pathlib.Path('monitoring/grafana/dashboards').glob('*.json'):
+              json.load(path.open())
+          PY
+          docker compose -f monitoring/docker-compose.yml config --quiet
+          docker compose -f file_generation/file_service/compose.yaml config --quiet
+      - name: Toolbox security regression checks
+        run: |
+          ! rg -n 'shell=True|os\.system|requests\.(get|post)|urllib' file_generation/file_service/app.py
+          rg -n 'read_only: true|cap_drop: \[ALL\]|no-new-privileges|pids_limit|mem_limit' file_generation/file_service/compose.yaml
+      - name: Whitespace and secret guard
+        run: |
+          git diff --check HEAD^ HEAD || true
+          ! rg -n --glob '!*.md' --glob '!*.example' '(?i)(password|api[_-]?key|master_key|bearer)[[:space:]]*[:=][[:space:]]*[^$[:space:]][^[:space:]]+' .github deployment monitoring file_generation

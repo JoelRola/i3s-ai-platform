@@ -1,0 +1,56 @@
+// Restricted read-only collection: no Docker socket and no host write paths.
+// Keep only low-cardinality labels (host, service, container, level, unit).
+loki.process "redact" {
+  forward_to = [loki.write.local.receiver]
+  stage.replace {
+    expression = "(?i)(authorization[=: ]+bearer[ ]+)[A-Za-z0-9._~+/-]+"
+    replace    = "${1}[REDACTED]"
+  }
+  stage.replace {
+    expression = "(?i)((api[_-]?key|token|password|secret)[=:]+)[^, ]+"
+    replace    = "${1}[REDACTED]"
+  }
+  stage.regex {
+    expression = "(?i)(?P<level>error|warn|warning|info|debug|critical)"
+  }
+  stage.labels {
+    values = { level = "" }
+  }
+  stage.label_keep {
+    values = ["host", "service", "container", "level", "unit"]
+  }
+}
+
+// Docker json-file logs are read directly; Docker's logging configuration stays untouched.
+loki.source.file "docker" {
+  targets = [{__path__ = "/var/lib/docker/containers/*/*-json.log", host = "i3s-ai", service = "docker", container = "docker-json"}]
+  forward_to = [loki.process.docker_json.receiver]
+  file_match {
+    enabled = true
+    sync_period = "15s"
+    ignore_older_than = "15m"
+  }
+}
+loki.process "docker_json" {
+  forward_to = [loki.process.redact.receiver]
+  stage.json {
+    expressions = { message = "log" }
+  }
+  stage.output {
+    source = "message"
+  }
+}
+
+// Persistent journal collection is deliberately limited to the two Ollama units.
+loki.source.journal "ollama" {
+  path       = "/var/log/journal"
+  matches    = "_SYSTEMD_UNIT=ollama.service _SYSTEMD_UNIT=ollama-embed.service"
+  max_age    = "15m"
+  labels     = { host = "i3s-ai", service = "ollama", unit = "ollama" }
+  forward_to = [loki.process.redact.receiver]
+}
+loki.write "local" {
+  endpoint {
+    url = "http://loki:3100/loki/api/v1/push"
+  }
+}

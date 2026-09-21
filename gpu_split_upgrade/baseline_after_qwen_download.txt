@@ -1,0 +1,191 @@
+brain2
+2026-09-15T13:53:51+00:00
+Tue Sep 15 13:53:51 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 580.178.04             Driver Version: 580.178.04     CUDA Version: 13.0     |
++-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  Tesla P100-PCIE-16GB           Off |   00000000:00:10.0 Off |                    0 |
+| N/A   42C    P0             25W /  250W |       0MiB /  16384MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+|   1  NVIDIA A100-SXM4-40GB          Off |   00000000:00:11.0 Off |                    0 |
+| N/A   46C    P0             41W /  400W |   16121MiB /  40960MiB |      0%      Default |
+|                                         |                        |             Disabled |
++-----------------------------------------+------------------------+----------------------+
+
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|    1   N/A  N/A           16832      C   ...local/lib/ollama/llama-server      16110MiB |
++-----------------------------------------------------------------------------------------+
+GPU 0: Tesla P100-PCIE-16GB (UUID: GPU-685c9973-bece-68da-c697-474881571cee)
+GPU 1: NVIDIA A100-SXM4-40GB (UUID: GPU-f60893db-9b34-48da-859c-ad6639f545ef)
+NAME                  ID              SIZE      MODIFIED       
+qwen3.5:9b            6488c96fa5fa    6.6 GB    24 minutes ago    
+qwen2.5-coder:7b      dae161e27b0e    4.7 GB    27 hours ago      
+qwen2.5-coder:3b      f72c60cabf62    1.9 GB    27 hours ago      
+qwen2.5:7b            845dbda0ea48    4.7 GB    27 hours ago      
+qwen2.5:3b            357c53fb659c    1.9 GB    27 hours ago      
+llama3.2:3b           a80c4f17acd5    2.0 GB    27 hours ago      
+gemma3:12b            f4031aab637d    8.1 GB    3 days ago        
+qwen3:14b             bdbd181c33f2    9.3 GB    3 days ago        
+mistral-nemo:12b      e7e06d107c6c    7.1 GB    3 days ago        
+qwen2.5-coder:0.5b    4ff64a7f502a    397 MB    4 days ago        
+gemma3:1b             8648f39daa8f    815 MB    4 days ago        
+qwen2.5-coder:1.5b    d7372fd82851    986 MB    4 days ago        
+NAME          ID              SIZE     PROCESSOR    CONTEXT    UNTIL               
+qwen3.5:9b    6488c96fa5fa    15 GB    100% GPU     262144     24 minutes from now    
+               total        used        free      shared  buff/cache   available
+Mem:            14Gi       5.6Gi       1.4Gi       1.6Gi       9.7Gi       9.1Gi
+Swap:          4.0Gi       357Mi       3.7Gi
+Filesystem                         Size  Used Avail Use% Mounted on
+/dev/mapper/ubuntu--vg-ubuntu--lv   57G   26G   30G  47% /
+/dev/sdb1                           98G   48G   46G  52% /mnt/ai-data
+CONTAINER ID   IMAGE                                           COMMAND                  CREATED        STATUS                 PORTS     NAMES
+9ac1e7fb1a44   docker.litellm.ai/berriai/litellm:main-latest   "docker/prod_entrypo…"   24 hours ago   Up 2 hours                       litellm
+eac50a38f1de   ghcr.io/open-webui/open-webui:main              "bash start.sh"          4 days ago     Up 2 hours (healthy)             open-webui
+● ollama.service - Ollama Service
+     Loaded: loaded (/etc/systemd/system/ollama.service; enabled; preset: enabled)
+    Drop-In: /etc/systemd/system/ollama.service.d
+             └─override.conf
+     Active: active (running) since Tue 2026-09-15 12:21:48 UTC; 1h 32min ago
+ Invocation: e027be2401c2409a854cab779fbc354f
+   Main PID: 1188 (ollama)
+      Tasks: 30 (limit: 13862)
+     Memory: 10.6G (peak: 11.7G, swap: 3.1M, swap peak: 1.7G)
+        CPU: 1h 42min 19.865s
+     CGroup: /system.slice/ollama.service
+             ├─ 1188 /usr/local/bin/ollama serve
+             └─16832 /usr/local/lib/ollama/llama-server --model /mnt/ai-data/ollama/models/blobs/sha256-dec52a44569a2a25341c4e4d3fee25846eed4f6f0b936278e3a3c900bb99d37c --port 35657 --host 127.0.0.1 --no-webui --offline -c 262144 -np 1 --log-verbosity 4 --no-log-prefix --no-log-timestamps --no-jinja --chat-template chatml --mmproj /mnt/ai-data/ollama/models/blobs/sha256-dec52a44569a2a25341c4e4d3fee25846eed4f6f0b936278e3a3c900bb99d37c --load-mode none --flash-attn auto -b 2048 -ub 2048 --split-mode none --main-gpu 0 --context-shift --keep 4
+
+Sep 15 13:48:21 brain2 ollama[1188]: slot print_timing: id  0 | task 23747 |        eval time =   40617.69 ms /  2395 tokens (   16.97 ms per token,    58.94 tokens per second)
+Sep 15 13:48:21 brain2 ollama[1188]: slot print_timing: id  0 | task 23747 |       total time =   45119.38 ms /  9701 tokens
+Sep 15 13:48:21 brain2 ollama[1188]: slot print_timing: id  0 | task 23747 |    graphs reused =      26009
+Sep 15 13:48:21 brain2 ollama[1188]: [GIN] 2026/09/15 - 13:48:21 | 200 | 50.952883013s |       127.0.0.1 | POST     "/api/chat"
+Sep 15 13:48:21 brain2 ollama[1188]: slot      release: id  0 | task 23747 | stop processing: n_tokens = 14820, truncated = 0
+Sep 15 13:48:21 brain2 ollama[1188]: srv  update_slots: all slots are idle
+Sep 15 13:53:51 brain2 ollama[1188]: [GIN] 2026/09/15 - 13:53:51 | 200 |       30.13µs |       127.0.0.1 | HEAD     "/"
+Sep 15 13:53:51 brain2 ollama[1188]: [GIN] 2026/09/15 - 13:53:51 | 200 |     821.812µs |       127.0.0.1 | GET      "/api/tags"
+Sep 15 13:53:51 brain2 ollama[1188]: [GIN] 2026/09/15 - 13:53:51 | 200 |       31.14µs |       127.0.0.1 | HEAD     "/"
+Sep 15 13:53:51 brain2 ollama[1188]: [GIN] 2026/09/15 - 13:53:51 | 200 |      35.239µs |       127.0.0.1 | GET      "/api/ps"
+Environment=PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin OLLAMA_MODELS=/mnt/ai-data/ollama/models OLLAMA_HOST=127.0.0.1:11434 OLLAMA_MAX_LOADED_MODELS=1 OLLAMA_NUM_PARALLEL=2 OLLAMA_KEEP_ALIVE=30m
+# /etc/systemd/system/ollama.service
+[Unit]
+Description=Ollama Service
+After=network-online.target
+
+[Service]
+ExecStart=/usr/local/bin/ollama serve
+User=ollama
+Group=ollama
+Restart=always
+RestartSec=3
+Environment="PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin"
+
+[Install]
+WantedBy=default.target
+
+# /etc/systemd/system/ollama.service.d/override.conf
+[Service]
+Environment="OLLAMA_MODELS=/mnt/ai-data/ollama/models"
+Environment="OLLAMA_HOST=127.0.0.1:11434"
+Environment="OLLAMA_MAX_LOADED_MODELS=1"
+Environment="OLLAMA_NUM_PARALLEL=2"
+Environment="OLLAMA_KEEP_ALIVE=30m"
+
+[LiteLLM config, redacted]
+model_list:
+  - model_name: i3s-fast
+    litellm_params:
+      model: ollama_chat/llama3.2:3b
+      api_base: [REDACTED]
+      temperature: 0.2
+      num_ctx: 4096
+
+  - model_name: i3s-balanced
+    litellm_params:
+      model: ollama_chat/qwen2.5:7b
+      api_base: [REDACTED]
+      temperature: 0.2
+      num_ctx: 4096
+
+  - model_name: i3s-coding
+    litellm_params:
+      model: ollama_chat/qwen2.5-coder:7b
+      api_base: [REDACTED]
+      temperature: 0.15
+      num_ctx: 4096
+
+  - model_name: i3s-diagrams
+    litellm_params:
+      model: ollama_chat/mistral-nemo:12b
+      api_base: [REDACTED]
+      temperature: 0.2
+      num_ctx: 4096
+
+general_settings:
+  master_key: [REDACTED]
+  disable_spend_logs: false
+
+litellm_settings:
+  drop_params: true
+  request_timeout: 600
+
+[Open WebUI inspect]
+Image=ghcr.io/open-webui/open-webui:main Network=host Restart=always Mounts=/var/lib/docker/volumes/open-webui/_data:/app/backend/data  EnvKeys=OLLAMA_BASE_URL
+OLLAMA_BASE_URLS
+WEBUI_NAME
+PATH
+LANG
+GPG_KEY
+PYTHON_VERSION
+PYTHON_SHA256
+PYTHONUNBUFFERED
+ENV
+PORT
+USE_OLLAMA_DOCKER
+USE_CUDA_DOCKER
+USE_SLIM_DOCKER
+USE_CUDA_DOCKER_VER
+USE_EMBEDDING_MODEL_DOCKER
+USE_RERANKING_MODEL_DOCKER
+USE_AUXILIARY_EMBEDDING_MODEL_DOCKER
+OPENAI_API_BASE_URL
+OPENAI_API_KEY
+WEBUI_SECRET_KEY
+SCARF_NO_ANALYTICS
+DO_NOT_TRACK
+ANONYMIZED_TELEMETRY
+WHISPER_MODEL
+WHISPER_MODEL_DIR
+RAG_EMBEDDING_MODEL
+RAG_RERANKING_MODEL
+AUXILIARY_EMBEDDING_MODEL
+SENTENCE_TRANSFORMERS_HOME
+TIKTOKEN_ENCODING_NAME
+TIKTOKEN_CACHE_DIR
+HF_HOME
+HOME
+UV_LINK_MODE
+WEBUI_BUILD_VERSION
+DOCKER
+
+State  Recv-Q Send-Q               Local Address:Port  Peer Address:PortProcess
+LISTEN 0      4096                 100.77.252.45:46405      0.0.0.0:*          
+LISTEN 0      4096                       0.0.0.0:22         0.0.0.0:*          
+LISTEN 0      2048                       0.0.0.0:8080       0.0.0.0:*          
+LISTEN 0      2048                     127.0.0.1:4000       0.0.0.0:*          
+LISTEN 0      4096                 100.77.252.45:443        0.0.0.0:*          
+LISTEN 0      4096                     127.0.0.1:11434      0.0.0.0:*          
+LISTEN 0      512                      127.0.0.1:35657      0.0.0.0:*          
+LISTEN 0      4096                 127.0.0.53%lo:53         0.0.0.0:*          
+LISTEN 0      4096                    127.0.0.54:53         0.0.0.0:*          
+LISTEN 0      4096   [fd7a:115c:a1e0::b836:fc2e]:443           [::]:*          
+LISTEN 0      4096   [fd7a:115c:a1e0::b836:fc2e]:58190         [::]:*          
+LISTEN 0      4096                          [::]:22            [::]:*          

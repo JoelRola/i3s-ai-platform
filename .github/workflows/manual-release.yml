@@ -1,0 +1,29 @@
+name: Manual release handoff
+
+on:
+  workflow_dispatch:
+    inputs:
+      component:
+        description: Component to release using the reviewed host procedure
+        required: true
+        type: choice
+        options: [monitoring, file-service]
+      version:
+        description: Reviewed release version or commit
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  handoff:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Confirm manual production handoff
+        run: |
+          echo "CI validation must be green before release."
+          echo "Component: ${{ inputs.component }}"
+          echo "Version: ${{ inputs.version }}"
+          echo "This workflow deliberately has no SSH credentials and does not deploy."
+          echo "An authorized operator performs the targeted host release using deployment/release.sh."
