@@ -19,6 +19,9 @@ jobs:
       - name: Shell syntax
         run: |
           find . -type f -name '*.sh' -print0 | xargs -0 -r -n1 bash -n
+      - name: Prepare CI environment
+        run: |
+          cp monitoring/grafana.env.example monitoring/grafana.env
       - name: Configuration schema checks
         run: |
           python - <<'PY'
