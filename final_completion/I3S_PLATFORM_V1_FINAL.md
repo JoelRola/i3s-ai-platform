@@ -11,7 +11,7 @@ Observed deployed versions: Docker Engine 29.8.0; Compose v5.5.1; Ollama 0.34.0;
 ## Validation and URLs
 
 - GPU split: fresh proof `dual_gpu_proof_20260922T074749Z.txt` and CSV record simultaneous generation plus 24 embeddings, with A100 and P100 peak utilization both at 100%.
-- CI: GitHub Actions **I3S CI PASS**, run [35701377174](https://github.com/JoelRola/i3s-ai-platform/actions/runs/35701377174), commit `66343be189f9a8616b69d5cecf83a19cb641bc60`.
+- CI: GitHub Actions **I3S CI PASS**, run [35702182975](https://github.com/JoelRola/i3s-ai-platform/actions/runs/35702182975), commit `9fe6af7bfa6723ddcea33afb52ebe172d445a350`.
 - Local health: Open WebUI `/health`, Grafana `/api/health`, and Tika `/tika` all returned HTTP 200. Public Funnel health: `https://brain2.tailcedd84.ts.net` and `https://brain2.tailcedd84.ts.net:8443` both returned HTTP 200.
 - Open WebUI targeted restart: healthy afterward; read-only aggregate counts remained 51 chats and 6 users.
 - Final non-deploying checks PASS: Python and shell syntax, Compose configuration, dashboard JSON, Toolbox runtime dependency imports, `git diff --check`, and tracked-source secret scan. The standalone host artifact script was not runnable because optional document libraries are intentionally absent from the host; the running isolated Toolbox image contains them and prior Toolbox acceptance passed.
