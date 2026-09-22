@@ -106,8 +106,6 @@ These are workload-specific benchmark results from the recorded V1 test runs, no
 | Maximum tested stable concurrency | 8 |
 | Dual-GPU isolation | PASS |
 
-*V1 benchmark snapshot: repeatable workload-specific results, not a universal capacity guarantee.*
-
 ## Performance evolution
 
 The repository preserves the engineering progression that led to V1:
