@@ -66,6 +66,9 @@ __pycache__/
 file-generation-validation/
 benchmark/results/*/responses.jsonl
 
+# Review-only source screenshots; publish only manually approved copies in docs/images/.
+docs/images/inbox/
+
 # Tools and IDEs
 .DS_Store
 .idea/
