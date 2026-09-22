@@ -1,0 +1,12 @@
+# Source-host V1 observed versions (2026-09-22 UTC)
+Ubuntu kernel: Linux 7.0.0-31-generic
+systemd: 259.5
+Docker Engine: 29.8.0
+Docker Compose: v5.5.1
+Ollama: 0.34.0
+Open WebUI: v0.11.3 (image tag main; pin an immutable image digest before a future upgrade)
+Grafana: 12.3.1
+Loki: 3.7.2
+Alloy: 1.19.2
+Prometheus: 3.8.1
+Tika: 3.2.3.0

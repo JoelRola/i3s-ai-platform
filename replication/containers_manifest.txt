@@ -1,0 +1,12 @@
+# Docker containers / persistent state
+open-webui                 ghcr.io/open-webui/open-webui:main     volume: open-webui -> /app/backend/data
+litellm                    docker.litellm.ai/berriai/litellm:main-latest
+tika                       apache/tika:3.2.3.0
+i3s-file-service           i3s/file-service:local                volume: i3s-file-service-data
+open-terminal-i3s-work     i3s/open-terminal-filegen:local       volume: i3s-work-terminal-data
+prometheus                 prom/prometheus:v3.8.1                 volume: monitoring_prometheus_data
+grafana                    grafana/grafana:12.3.1                 volume: monitoring_grafana_data
+loki                       grafana/loki:3.7.2                     volume: monitoring_loki_data
+alloy                      grafana/alloy:v1.19.2                  volume: monitoring_alloy_data
+node-exporter              prom/node-exporter:v1.10.2
+cadvisor                   gcr.io/cadvisor/cadvisor:v0.55.1

@@ -1,0 +1,13 @@
+# Bind addresses and ports
+0.0.0.0:8080             Open WebUI (public only through controlled policy/Funnel)
+127.0.0.1:11434          main Ollama
+127.0.0.1:11435          embedding Ollama
+127.0.0.1:4000           LiteLLM
+127.0.0.1:9998           Tika
+127.0.0.1:9090           Prometheus
+127.0.0.1:3001           Grafana
+127.0.0.1:3100           Loki
+Tailscale Funnel :443     proxy to 127.0.0.1:8080
+Tailscale Funnel :8443    proxy to 127.0.0.1:3001
+
+Toolbox and terminal services are internal Docker networks only; do not publish their ports.

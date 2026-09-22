@@ -1,0 +1,10 @@
+# systemd services/timers
+ollama.service                 # main generation, A100, 127.0.0.1:11434
+ollama-embed.service           # embedding, P100, 127.0.0.1:11435
+tailscaled.service
+i3s-public-access-watchdog.service (user unit)
+i3s-public-access-watchdog.timer   (user unit, enabled)
+nvidia-textfile-collector.service  (user unit)
+nvidia-textfile-collector.timer    (user unit)
+
+# Source unit templates: gpu_split_upgrade/ollama-embed.service and monitoring/*.service/*.timer
