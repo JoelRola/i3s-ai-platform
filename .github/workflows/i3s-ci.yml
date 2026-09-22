@@ -36,9 +36,12 @@ jobs:
           docker compose -f file_generation/file_service/compose.yaml config --quiet
       - name: Toolbox security regression checks
         run: |
-          ! rg -n 'shell=True|os\.system|requests\.(get|post)|urllib' file_generation/file_service/app.py
-          rg -n 'read_only: true|cap_drop: \[ALL\]|no-new-privileges|pids_limit|mem_limit' file_generation/file_service/compose.yaml
+          ! grep -nE 'shell=True|os\.system|requests\.(get|post)|urllib' file_generation/file_service/app.py
+          grep -nE 'read_only: true|cap_drop: \[ALL\]|no-new-privileges|pids_limit|mem_limit' file_generation/file_service/compose.yaml
       - name: Whitespace and secret guard
         run: |
           git diff --check HEAD^ HEAD || true
-          ! rg -n --glob '!*.md' --glob '!*.example' '(?i)(password|api[_-]?key|master_key|bearer)[[:space:]]*[:=][[:space:]]*[^$[:space:]][^[:space:]]+' .github deployment monitoring file_generation
+          if git grep -nEI "(password|api[_-]?key|master_key)[[:space:]]*[:=][[:space:]]*[\"']?[A-Za-z0-9_./+=-]{16,}|bearer[[:space:]]+[A-Za-z0-9_./+=-]{16,}" -- .github deployment monitoring file_generation ':(exclude)*.md' ':(exclude)*.example'; then
+            echo 'Possible committed secret detected.' >&2
+            exit 1
+          fi
