@@ -27,8 +27,8 @@ V1 is frozen as a stable baseline: the architecture, model assignments, profile 
 
 These are workload-specific V1 benchmark results, not universal production-capacity guarantees.
 
-![I3S AI Platform V1 architecture overview](docs/images/architecture-overview.png)
-
+![I3S AI Platform V1 architecture overview](<img width="825" height="396" alt="image" src="https://github.com/user-attachments/assets/70b92332-feb3-4835-9ed8-4ae0cb188f73" />
+)
 *Platform architecture — Open WebUI profiles, split Ollama services, document tooling, persistent storage, and the observability layer.*
 
 ## Project overview
