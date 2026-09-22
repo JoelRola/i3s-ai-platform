@@ -145,7 +145,7 @@ Dashboard source is committed for review and repeatable provisioning:
 
 *Platform observability — GPU, host, service, and available LiteLLM activity telemetry in Grafana.*
 
-![Validated GPU separation — live A100 generation telemetry alongside the P100 embedding device.](docs/images/dual-gpu-monitoring.png)
+![Validated GPU separation — live A100 generation telemetry alongside the P100 embedding device.](docs/images/A100P100.png)
 
 *Validated GPU separation — live A100 generation telemetry alongside the P100 embedding device.*
 
